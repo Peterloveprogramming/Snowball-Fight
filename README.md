@@ -5,6 +5,7 @@
 <p id="description">This is a multiplayer VR game developed using Photon, where players can enjoy the Christmas season with friends by engaging in festive activities like snowball fights and competing to collect Christmas presents.</p>
 
 <h2>🚀 Demo</h2>
+
 ![ezgif-7-4a7ef80b18](https://github.com/user-attachments/assets/cc52d949-c8e2-4dae-a58f-a1cb5fc758d3)
 
 ![ezgif-7-4a7ef80b19](https://github.com/user-attachments/assets/cb130669-afe9-461e-a197-823556a93067)
@@ -15,11 +16,11 @@
 <h2>🧐 Features</h2>
 Here're some of the project's best features:
 
-*Photon Multiplayer: Real-time, low-latency multiplayer for smooth, engaging gameplay like snowball fights and competitions.
-*XR Interaction Toolkit: Immersive VR mechanics for grabbing, throwing, and interacting with virtual objects.
-*Fun Mechanics: Snowball fights for friendly battles and present capture for fast-paced, festive challenges.
+*   Photon Multiplayer: Real-time, low-latency multiplayer for smooth, engaging gameplay like snowball fights and competitions.
+*   Interaction Toolkit: Immersive VR mechanics for grabbing, throwing, and interacting with virtual objects.
+*   Fun Mechanics: Snowball fights for friendly battles and present capture for fast-paced, festive challenges.
 
-Technologies used in the project:
+<h2>💻 Built with</h2>
 
 *   Unity
 *   XR Interaction Toolkit
