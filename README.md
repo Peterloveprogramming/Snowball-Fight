@@ -1,4 +1,4 @@
-<h1 align="center" id="title">Snowball fight</h1>
+<h1 align="center" id="title">Snowball Fight</h1>
 
 
 ![Picture](https://github.com/user-attachments/assets/93e6b165-b997-46d7-8a22-0db7c4bbf82a)
