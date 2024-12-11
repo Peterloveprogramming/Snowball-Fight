@@ -21,7 +21,7 @@ public class SnowBehavior : MonoBehaviour
     {
         Destroy(gameObject);
         GameObject explosion = Instantiate(snowExplode,transform.position,transform.rotation);
-        Destroy(explosion,0.75f);
+        Destroy(explosion,1f);
 
     }
       

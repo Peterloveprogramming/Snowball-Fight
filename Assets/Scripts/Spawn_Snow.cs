@@ -14,6 +14,28 @@ public class PrefabInstantiator : MonoBehaviour
     [SerializeField]
     private Transform spawnPoint; // Optional spawn point
 
+
+    public bool snowOnCooldown = false;
+    public float snowOnCooldownTime = 2.5f;
+    public float currentTime = 0f; // Changed from bool to float
+
+
+    void Update()
+    {
+        if (snowOnCooldown)
+        {
+            // Increment currentTime by the time passed since the last frame
+            currentTime += Time.deltaTime;
+
+            // Check if the cooldown period has passed
+            if (currentTime >= snowOnCooldownTime)
+            {
+                currentTime = 0f; // Reset current time
+                snowOnCooldown = false; // End cooldown
+            }
+        }
+    }
+
     private void OnEnable()
     {
         // Subscribe to input action
@@ -35,13 +57,14 @@ public class PrefabInstantiator : MonoBehaviour
     {
         Debug.Log("triggered");
 
-        if (prefabToInstantiate != null)
+        if (prefabToInstantiate != null && !snowOnCooldown )
         {
             Vector3 spawnPosition = spawnPoint != null ? spawnPoint.position : Vector3.zero;
             Quaternion spawnRotation = spawnPoint != null ? spawnPoint.rotation : Quaternion.identity;
 
             // Instantiate the prefab
             Instantiate(prefabToInstantiate, spawnPosition, spawnRotation);
+            snowOnCooldown = true;
         }
         else
         {

@@ -23,6 +23,27 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// </remarks>
         public const int k_UpdateOrder = XRInteractionUpdateOrder.k_Controllers - 1;
 
+
+        public bool teleportOnCooldown = false;
+        public float teleportCooldownTime = 5f;
+        public float currentTime = 0f; // Changed from bool to float
+
+        void Update()
+        {
+            if (teleportOnCooldown)
+            {
+                // Increment currentTime by the time passed since the last frame
+                currentTime += Time.deltaTime;
+
+                // Check if the cooldown period has passed
+                if (currentTime >= teleportCooldownTime)
+                {
+                    currentTime = 0f; // Reset current time
+                    teleportOnCooldown = false; // End cooldown
+                }
+            }
+        }
+
         [Space]
         [Header("Interactors")]
 
@@ -154,16 +175,19 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             var teleportModeActivateAction = GetInputAction(m_TeleportModeActivate);
             if (teleportModeActivateAction != null)
             {
-                teleportModeActivateAction.performed += OnStartTeleport;
-                teleportModeActivateAction.performed += OnStartLocomotion;
-                teleportModeActivateAction.canceled += OnCancelTeleport;
-                teleportModeActivateAction.canceled += OnStopLocomotion;
+
+                    teleportModeActivateAction.performed += OnStartTeleport;
+                    teleportModeActivateAction.performed += OnStartLocomotion;
+                    teleportModeActivateAction.canceled += OnCancelTeleport;
+                    teleportModeActivateAction.canceled += OnStopLocomotion;
+ 
             }
 
             var teleportModeCancelAction = GetInputAction(m_TeleportModeCancel);
             if (teleportModeCancelAction != null)
             {
                 teleportModeCancelAction.performed += OnCancelTeleport;
+                teleportOnCooldown = false;
             }
 
             var moveAction = GetInputAction(m_Move);
@@ -235,15 +259,19 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
         void OnStartTeleport(InputAction.CallbackContext context)
         {
-            m_PostponedDeactivateTeleport = false;
+            if (!teleportOnCooldown)
+            {
+                m_PostponedDeactivateTeleport = false;
 
-            if (m_TeleportInteractor != null)
-                m_TeleportInteractor.gameObject.SetActive(true);
+                if (m_TeleportInteractor != null)
+                    m_TeleportInteractor.gameObject.SetActive(true);
 
-            if (m_RayInteractor != null)
-                m_RayInteractor.gameObject.SetActive(false);
+                if (m_RayInteractor != null)
+                    m_RayInteractor.gameObject.SetActive(false);
 
-            m_RayInteractorChanged?.Invoke(m_TeleportInteractor);
+                m_RayInteractorChanged?.Invoke(m_TeleportInteractor);
+                teleportOnCooldown = true;
+            }
         }
 
         void OnCancelTeleport(InputAction.CallbackContext context)

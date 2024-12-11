@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Snow
   - Controller
+  - Destructible
+  - Teleport
   layers:
   - Default
   - TransparentFX
