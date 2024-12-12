@@ -27,6 +27,14 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         public bool teleportOnCooldown = false;
         public float teleportCooldownTime = 5f;
         public float currentTime = 0f; // Changed from bool to float
+        private bool teleportIsLocked = false;
+
+        public void setLockTeleport(bool lockTeleportState){
+            teleportIsLocked = lockTeleportState;
+        }
+
+
+
 
         void Update()
         {
@@ -259,7 +267,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
         void OnStartTeleport(InputAction.CallbackContext context)
         {
-            if (!teleportOnCooldown)
+            if (!teleportOnCooldown && !teleportIsLocked)
             {
                 m_PostponedDeactivateTeleport = false;
 
