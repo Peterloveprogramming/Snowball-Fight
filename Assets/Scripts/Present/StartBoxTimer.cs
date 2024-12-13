@@ -18,13 +18,15 @@ public class StartBoxTimer : MonoBehaviour
     private float timer; // Current timer value
     private bool isTimerRunning = false; // Flag to track if the timer is active
 
+
     public GameObject FloatingTextPrefab;
     public GameObject celebration;
 
     // get snow and teleport to lock them up while touching present
+    [SerializeField]
     public SpawnSnow spawnSnow;
+    [SerializeField]
     public UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets.ActionBasedControllerManager teleportController;
-
 
     public void resetTimer(){
         isTimerRunning = false;
@@ -32,15 +34,16 @@ public class StartBoxTimer : MonoBehaviour
         boxTimer.gameObject.SetActive(false);
     }
 
-    public void Start()
+public void Start()
+{
+    disableTelportAndSnowSpawn();
+    if (boxTimer != null)
     {
-        if (boxTimer != null)
-        {
-            boxTimer.gameObject.SetActive(false); // Hide the timer UI initially
-            boxTimer.fillAmount = 1f; // Ensure the timer UI is full initially
-        }
-        timer = timerDuration; // Initialize the timer with the duration
+        boxTimer.gameObject.SetActive(false); // Hide the timer UI initially
+        boxTimer.fillAmount = 1f; // Ensure the timer UI is full initially
     }
+    timer = timerDuration; // Initialize the timer with the duration
+}
 
     public void StartTimer()
     {
