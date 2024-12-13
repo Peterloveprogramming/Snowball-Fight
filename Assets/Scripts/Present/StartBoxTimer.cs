@@ -36,7 +36,6 @@ public class StartBoxTimer : MonoBehaviour
 
 public void Start()
 {
-    disableTelportAndSnowSpawn();
     if (boxTimer != null)
     {
         boxTimer.gameObject.SetActive(false); // Hide the timer UI initially
