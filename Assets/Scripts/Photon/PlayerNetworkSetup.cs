@@ -26,23 +26,43 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
             //The player is local
             LocalXRRigGameobject.SetActive(true);
 
-            Debug.Log("Setting up XR Rig for the local player");
+            //Getting the avatar selection data so that the correct avatar model can be instantiated.
+            // object avatarSelectionNumber;
+            // if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(MultiplayerVRConstants.AVATAR_SELECTION_NUMBER,out avatarSelectionNumber ))
+            // {
+            //     Debug.Log("Avatar selection number: "+ (int)avatarSelectionNumber);
+            //     photonView.RPC("InitializeSelectedAvatarModel",RpcTarget.AllBuffered,(int)avatarSelectionNumber);
+            // }
 
 
             SetLayerRecursively(AvatarHeadGameobject,6);
             SetLayerRecursively(AvatarBodyGameobject,7);
 
- 
+            TeleportationArea[] teleportationAreas = GameObject.FindObjectsOfType<TeleportationArea>();
+            if (teleportationAreas.Length > 0)
+            {
+                Debug.Log("Found "+ teleportationAreas.Length+ " teleportation area. ");
+                foreach (var item in teleportationAreas)
+                {
+                    item.teleportationProvider = LocalXRRigGameobject.GetComponent<TeleportationProvider>();
+                }
+            }
+            MainAvatarGameobject.AddComponent<AudioListener>();
+
         }
         else
         {
-            Debug.Log("Setting up XR Rig for the other player");
             //The player is remote
             LocalXRRigGameobject.SetActive(false);
 
             SetLayerRecursively(AvatarHeadGameobject, 0);
             SetLayerRecursively(AvatarBodyGameobject, 0);
         }
+
+        // if (PlayerName_Text !=null)
+        // {
+        //     PlayerName_Text.text = photonView.Owner.NickName;
+        // }
     }
 
     // Update is called once per frame
@@ -59,6 +79,26 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
             trans.gameObject.layer = layerNumber;
         }
     }
+
+    // [PunRPC]
+    // public void InitializeSelectedAvatarModel(int avatarSelectionNumber)
+    // {
+    //     GameObject selectedAvatarGameobject = Instantiate(AvatarModelPrefabs[avatarSelectionNumber], LocalXRRigGameobject.transform);
+
+    //     AvatarInputConverter avatarInputConverter = LocalXRRigGameobject.GetComponent<AvatarInputConverter>();
+    //     AvatarHolder avatarHolder = selectedAvatarGameobject.GetComponent<AvatarHolder>();
+    //     SetUpAvatarGameobject(avatarHolder.HeadTransform, avatarInputConverter.AvatarHead);
+    //     SetUpAvatarGameobject(avatarHolder.BodyTransform, avatarInputConverter.AvatarBody);
+    //     SetUpAvatarGameobject(avatarHolder.HandLeftTransform, avatarInputConverter.AvatarHand_Left);
+    //     SetUpAvatarGameobject(avatarHolder.HandRightTransform, avatarInputConverter.AvatarHand_Right);
+    // }
+
+    // void SetUpAvatarGameobject(Transform avatarModelTransform, Transform mainAvatarTransform)
+    // {
+    //     avatarModelTransform.SetParent(mainAvatarTransform);
+    //     avatarModelTransform.localPosition = Vector3.zero;
+    //     avatarModelTransform.localRotation = Quaternion.identity;
+    // }
 
 
 }
