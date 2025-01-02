@@ -164,7 +164,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     #region Private Methods
     private void CreateAndJoinRoom()
     {
-        string randomRoomName = "Room_" +mapType + Random.Range(1, 3);
+        string randomRoomName = "Room_" +mapType + Random.Range(0, 10000);
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 6;
 

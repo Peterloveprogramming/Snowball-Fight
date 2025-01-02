@@ -8,15 +8,15 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
 {
 
     public GameObject LocalXRRigGameobject;
-    public GameObject MainAvatarGameobject;
 
+    // public GameObject MainAvatarGameobject;
     public GameObject AvatarHeadGameobject;
     public GameObject AvatarBodyGameobject;
 
 
-    public GameObject[] AvatarModelPrefabs;
+    // public GameObject[] AvatarModelPrefabs;
 
-    public TextMeshProUGUI PlayerName_Text;
+    // public TextMeshProUGUI PlayerName_Text;
 
     // Start is called before the first frame update
     void Start()
@@ -38,16 +38,16 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
             SetLayerRecursively(AvatarHeadGameobject,6);
             SetLayerRecursively(AvatarBodyGameobject,7);
 
-            TeleportationArea[] teleportationAreas = GameObject.FindObjectsOfType<TeleportationArea>();
-            if (teleportationAreas.Length > 0)
-            {
-                Debug.Log("Found "+ teleportationAreas.Length+ " teleportation area. ");
-                foreach (var item in teleportationAreas)
-                {
-                    item.teleportationProvider = LocalXRRigGameobject.GetComponent<TeleportationProvider>();
-                }
-            }
-            MainAvatarGameobject.AddComponent<AudioListener>();
+            // TeleportationArea[] teleportationAreas = GameObject.FindObjectsOfType<TeleportationArea>();
+            // if (teleportationAreas.Length > 0)
+            // {
+            //     Debug.Log("Found "+ teleportationAreas.Length+ " teleportation area. ");
+            //     foreach (var item in teleportationAreas)
+            //     {
+            //         item.teleportationProvider = LocalXRRigGameobject.GetComponent<TeleportationProvider>();
+            //     }
+            // }
+            // MainAvatarGameobject.AddComponent<AudioListener>();
 
         }
         else

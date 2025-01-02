@@ -12,10 +12,13 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PhotonNetwork.IsConnected)
+        // if IsConnectedAndReady dosen't work then use IsConnected;
+        // PhotonNetwork.IsConnectedAndReady
+        if(PhotonNetwork.IsConnected)
         {
             PhotonNetwork.Instantiate(GenericVRPlayerPrefab.name,spawnPosition,Quaternion.identity);
         }
+        
     }
 
     // Update is called once per frame

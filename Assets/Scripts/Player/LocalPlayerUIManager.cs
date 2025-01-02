@@ -11,7 +11,7 @@ public class LocalPlayerUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GoHome_Button.GetComponent<Button>().onClick.AddListener(VirtualWorldManager.Instance.LeaveRoomAndLoadHomeScene);
+        // GoHome_Button.GetComponent<Button>().onClick.AddListener(VirtualWorldManager.Instance.LeaveRoomAndLoadHomeScene);
     }
 
     // Update is called once per frame
